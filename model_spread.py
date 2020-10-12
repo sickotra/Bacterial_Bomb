@@ -29,5 +29,9 @@ matplotlib.pyplot.xlim (0, 300)
 matplotlib.pyplot.title ('A plot to show the map of the town and the bombing location')
 matplotlib.pyplot.xlabel('x') #graph axis labels
 matplotlib.pyplot.ylabel('y')
+#mark the bomb location with a red diamond overlay 
+matplotlib.pyplot.scatter (50, 150, color='red', marker=('D'))
 #plotting map of the area/town and bombing location
 matplotlib.pyplot.imshow(town) 
+print ("Coords of building where bomb detonated: (50, 150)" ) #rounded to nearest int
+
