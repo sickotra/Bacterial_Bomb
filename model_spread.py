@@ -6,6 +6,8 @@ Created on Sat Oct 10 11:40:25 2020
 """
 import csv #to allow raster data to be read
 import matplotlib.pyplot #for plotting spread 
+import particle_framework #the particle class created 
+import random   #for random number generating
 
 
 
@@ -35,3 +37,30 @@ matplotlib.pyplot.scatter (50, 150, color='red', marker=('D'))
 matplotlib.pyplot.imshow(town) 
 print ("Coords of building where bomb detonated: (50, 150)" ) #rounded to nearest int
 
+
+
+
+
+#major model params
+pwest = 0.05 #probs of wind blowing particle
+pnorth = 0.1
+psouth = 0.1
+peast = 0.75
+num_of_particles = 50
+num_of_iterations = 100
+#current_wind = ???
+
+
+particles = []
+
+print ("Initialising particles--") 
+# Creating particles and adding to particles list
+
+for i in range (num_of_particles): 
+    y = 150
+    x = 50
+    #passing in data from town & particles list and y,x 
+    particles.append (particle_framework.Particle(town, particles, y, x))
+    print (particles[i].particles)  #TEST to see each part get part list
+#print ("Initial agents:") #comment out for large no's of agents
+#print (particles)  #prints list of all initial agents
