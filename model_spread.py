@@ -42,10 +42,10 @@ print ("Coords of building where bomb detonated: (50, 150)" ) #rounded to neares
 
 
 #major model params
-# pwest = 0.05 #probs of wind blowing particle
-# pnorth = 0.1
-# psouth = 0.1
-# peast = 0.75
+prob_east = 75 #probs of wind blowing particle
+prob_west = 5
+prob_north = 10
+prob_south = 10
 num_of_particles = 5000
 num_of_iterations = 100
 #current_wind = ???
@@ -80,7 +80,7 @@ for j in range (num_of_iterations):   #moves the coords num of iteration times
     #randomly shuffles agents list each iternation, reduce model artifacts
     #random.shuffle (agents) 
     for i in range (num_of_particles): #funcs act on every element in particles list
-        particles[i].spread() #caling spread func in Particles class 
+        particles[i].spread(prob_east, prob_west, prob_north, prob_south) #caling spread func in Particles class 
     
 print("Particles after moving:") #comment out for large no's of particles
 print (particles) # 2D list of particles after stepping

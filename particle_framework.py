@@ -20,20 +20,20 @@ class Particle:
         self.toxicity = 70 #base toxicity is 70 and will increase later
         self.particles = particles #giving every particle access to the 'particles' list
         
-    def spread (self):
+    def spread (self, prob_east, prob_west, prob_north, prob_south):
         
-        chance = random.randint(1, 100)
+        chance = random.randint(1, 100) #select a random in
         
-        if chance <= 75:
+        if chance <= prob_east:
             self.x = self.x + 1 # move east 75%
             
-        elif (75 < chance <= 80):
+        elif (prob_east < chance <= prob_east + prob_west):
             self.x = self.x - 1   #move west 5%
             
-        elif (80 < chance <= 90):
+        elif (prob_east + prob_west < chance <= prob_east + prob_west + prob_north):
             self.y = self.y + 1   #move north 10%
         
-        elif (90< chance <= 100): 
+        elif (prob_east + prob_west + prob_north < chance <= prob_east + prob_west + prob_north + prob_south): 
             self.y = self.y - 1 #move south 10%
     
     def __repr__(self):
