@@ -20,19 +20,24 @@ class Particle:
         self.toxicity = 70 #base toxicity is 70 and will increase later
         self.particles = particles #giving every particle access to the 'particles' list
         
-    def spread (self, pwest, pnorth, psouth, peast):
+    # def spread (self, pwest, pnorth, psouth, peast):
         
-        random = random.random()
+    #     rand = random.random()
         
-        if random < pwest:
-            self.x = self.x - 1
+    #     if rand < pwest:
+    #         self.x = self.x - 1
             
-        elif random < pnorth:
-            self.y = self.y + 1
+    #     elif rand < pnorth:
+    #         self.y = self.y + 1
             
-        elif random < psouth:
-            self.y = self.y - 1
+    #     elif rand < psouth:
+    #         self.y = self.y - 1
         
-        elif random < peast:
-            self.x = self.x + 1
+    #     elif rand < peast:
+    #         self.x = self.x + 1
+    
+    def __repr__(self):
+        """Make printable string version of instance objects in agent list."""
+        
+        return str([self.x, self.y]) #used to print initial & moved particles
         

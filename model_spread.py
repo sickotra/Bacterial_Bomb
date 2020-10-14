@@ -46,8 +46,8 @@ pwest = 0.05 #probs of wind blowing particle
 pnorth = 0.1
 psouth = 0.1
 peast = 0.75
-num_of_particles = 50
-num_of_iterations = 100
+num_of_particles = 10
+num_of_iterations = 50
 #current_wind = ???
 
 
@@ -56,11 +56,12 @@ particles = []
 print ("Initialising particles--") 
 # Creating particles and adding to particles list
 
-for i in range (num_of_particles): 
+for i in range(num_of_particles): 
     y = 150
     x = 50
     #passing in data from town & particles list and y,x 
     particles.append (particle_framework.Particle(town, particles, y, x))
-    print (particles[i].particles)  #TEST to see each part get part list
-#print ("Initial agents:") #comment out for large no's of agents
-#print (particles)  #prints list of all initial agents
+    #print (particles[i].particles)  #TEST to see each part get part list, all the same starting point!
+print ("Initial agents:") #comment out for large no's of agents
+print (particles)  #prints list of all initial agents to see list is made correctly, all same starting point as the bomb location
+
