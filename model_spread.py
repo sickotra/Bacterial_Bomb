@@ -9,7 +9,8 @@ import matplotlib.pyplot #for plotting spread
 import particle_framework #the particle class created 
 import random   #for random number generating
 
-
+#'fix' the random numbers so outputs stay constant, can change the seed arg
+random.seed(0)
 
 #Setting up town and to identify bombing location 
 f = open ('wind.raster', newline='') #read data from raster file
@@ -47,7 +48,7 @@ prob_west = 5
 prob_north = 10
 prob_south = 10
 num_of_particles = 5000
-num_of_iterations = 100
+num_of_iterations = 100 #i.e after 700 seconds, 11mins
 #current_wind = ???
 
 
@@ -69,12 +70,6 @@ for i in range(num_of_particles):
 
 
 
-#TEST IF WIND PROBABILITIES ARE WORKING
-#print(particles[1])
-#print (chance)
-
-
-
 print ("Spreading bomb particles--")
 for j in range (num_of_iterations):   #moves the coords num of iteration times
     #randomly shuffles agents list each iternation, reduce model artifacts
@@ -82,11 +77,12 @@ for j in range (num_of_iterations):   #moves the coords num of iteration times
     for i in range (num_of_particles): #funcs act on every element in particles list
         particles[i].spread(prob_east, prob_west, prob_north, prob_south) #caling spread func in Particles class 
     
-print("Particles after moving:") #comment out for large no's of particles
-print (particles) # 2D list of particles after stepping
+#print("Particles after moving:") #comment out for large no's of particles
+#print (particles) # 2D list of particles after stepping
 
 
-#plotting all points on a scatter graph, correct way ie x, y not y, x
+
+#plotting all particles after spreading on a scatter graph
 for i in range (num_of_particles):
     #get ith obj from particles list, using Particles Class to specify x, y coords
     matplotlib.pyplot.scatter (particles[i].x, particles[i].y) 

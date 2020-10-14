@@ -35,6 +35,8 @@ class Particle:
         
         elif (prob_east + prob_west + prob_north < chance <= prob_east + prob_west + prob_north + prob_south): 
             self.y = self.y - 1 #move south 10%
+            
+    
     
     def __repr__(self):
         """Make printable string version of instance objects in agent list."""
