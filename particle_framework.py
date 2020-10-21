@@ -45,6 +45,18 @@ class Particle:
         elif (p_east + p_west + p_north < chance <= p_east + p_west + p_north + p_south): 
             self.y = self.y - 1 #move south 10% chance default of value entered 
             
+        #Town is non abstract landscape, particles cannot follow torus boundary
+        #Create solid wall boundary, check if particle off edge & adjust
+        if self.x < 0:   #if x, y hit 0, stop from going below 0 
+            self.x = 0
+        if self.y < 0:
+            self.y = 0
+        if self.x > 300:  #if x, y hit 299 (300x300 is town dimension),
+            self.x = 300  #stop from going any higher
+        if self.y > 300:
+            self.y = 300
+        
+            
     
     
     def turbulance(self, p_rise, p_same, p_fall):

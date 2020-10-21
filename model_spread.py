@@ -95,7 +95,7 @@ for j in range (num_of_iterations):   #moves the coords num of iteration times
 #print (particles) # 2D list of particles after stepping
 
 
-# Plotting all particles after spreading on a scatter graph
+# Plotting all particles after spreading on a scatter plot
 for i in range (num_of_particles):
     #ith obj from particles list, using Particles Class to specify x, y coords
     matplotlib.pyplot.scatter (particles[i].x, particles[i].y) 
