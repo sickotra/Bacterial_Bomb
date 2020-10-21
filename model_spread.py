@@ -30,8 +30,8 @@ f.close() 	#file closed after reading data
 matplotlib.pyplot.ylim (0, 300) #setting graph axis
 matplotlib.pyplot.xlim (0, 300)
 matplotlib.pyplot.title ('A plot to show the map of the town and the bombing location')
-matplotlib.pyplot.xlabel('x') #graph axis labels
-matplotlib.pyplot.ylabel('y')
+matplotlib.pyplot.xlabel('x metres') #graph axis labels
+matplotlib.pyplot.ylabel('y metres')
 #mark the bomb location with a red diamond overlay 
 matplotlib.pyplot.scatter (50, 150, color='red', marker=('D'))
 #plotting map of the area/town and bombing location
