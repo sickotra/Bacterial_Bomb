@@ -32,23 +32,45 @@ class Particle:
     
     
         
-    def spread (self, prob_east, prob_west, prob_north, prob_south):
+    def spread(self, prob_east, prob_west, prob_north, prob_south):
         
         chance = random.randint(1, 100) #select a random integer between 1-100 
         
         if chance <= prob_east:
-            self.x = self.x + 1 # move east 75%
+            self.x = self.x + 1 # move east 75% chance default or value entered      #TODO Sys args defaults for all
             
         elif (prob_east < chance <= prob_east + prob_west):
-            self.x = self.x - 1   #move west 5%
+            self.x = self.x - 1   #move west 5% chance default or value entered 
             
         elif (prob_east + prob_west < chance <= prob_east + prob_west + prob_north):
-            self.y = self.y + 1   #move north 10%
+            self.y = self.y + 1   #move north 10% chance default or value entered
         
         elif (prob_east + prob_west + prob_north < chance <= prob_east + prob_west + prob_north + prob_south): 
-            self.y = self.y - 1 #move south 10%
+            self.y = self.y - 1 #move south 10% chance default of value entered 
             
     
     
+    def turbulance(self, prob_rise, prob_same, prob_fall):
+        
+        chance = random.randint(1, 100) #select a random integer between 1-100 
+               
+        if self.height >= 75: #for particles above the building height of 75m
+            if chance <= prob_rise:
+                self.height = self.height + 1  #particle rises, 20% chance or value entered
+               
+            elif (prob_rise < chance <= prob_rise + prob_same):
+                self.height = self.height   #particle stays at same level, 10% chnace or value entered
+               
+            elif (prob_rise + prob_same < chance <= prob_rise + prob_same + prob_fall):
+                self.height = self.height - 1
+                      
+        elif (0 < self.height < 75):   #for particles below the building height
+            self.height = self.height - 1   #falls by 1m per sec
+                   
+            
+               
+
+        
+   
    
         

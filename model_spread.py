@@ -43,13 +43,19 @@ print ("Coords of building where bomb detonated: (50, 150)" ) #rounded to neares
 
 
 #major model params
+num_of_particles = 5000
+num_of_iterations = 100 #i.e after 700 seconds, 11mins
+
 prob_east = 75 #probs of wind blowing particle
 prob_west = 5
 prob_north = 10
 prob_south = 10
-num_of_particles = 5000
-num_of_iterations = 100 #i.e after 700 seconds, 11mins
-#current_wind = ???
+
+prob_rise = 20 #probs of wind turbulance effects 
+prob_same = 10
+prob_fall = 70
+
+
 
 
 particles = []
@@ -74,9 +80,10 @@ print ("Spreading bomb particles--")
 for j in range (num_of_iterations):   #moves the coords num of iteration times
     #randomly shuffles agents list each iternation, reduce model artifacts
     #random.shuffle (agents) 
-    for i in range (num_of_particles): #funcs act on every element in particles list
-        particles[i].spread(prob_east, prob_west, prob_north, prob_south) #caling spread func in Particles class 
-    
+    for i in range (num_of_particles): #methods in Particles class act on every element in particles list
+        particles[i].spread(prob_east, prob_west, prob_north, prob_south) #caling spread method NESW movement
+        particles[i].turbulance(prob_rise, prob_same, prob_fall) #calling turbulance method, up/down movement
+        #print (particles[i].height) #test to see if turbulance method is working
 #print("Particles after moving:") #comment out for large no's of particles
 #print (particles) # 2D list of particles after stepping
 
