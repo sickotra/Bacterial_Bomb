@@ -8,9 +8,12 @@ import csv #to allow raster data to be read
 import matplotlib.pyplot #for plotting spread 
 import particle_framework #the particle class created 
 import random   #for random number generating
+import json #for outputting end locations of particles
 
 #'fix' the random numbers so outputs stay constant, can change the seed arg
 random.seed(0)
+
+
 
 #Setting up town and to identify bombing location 
 f = open ('wind.raster', newline='') #read data from raster file
@@ -26,6 +29,7 @@ for row in dataset:
     town.append (rowlist)  #each rowlist added to environ list, 2D now 
 f.close() 	#file closed after reading data
 
+
 #Plotting the raster data
 matplotlib.pyplot.ylim (0, 300) #setting graph axis
 matplotlib.pyplot.xlim (0, 300)
@@ -37,8 +41,6 @@ matplotlib.pyplot.scatter (50, 150, color='red', marker=('D'))
 #plotting map of the area/town and bombing location
 matplotlib.pyplot.imshow(town) 
 print ("Coords of building where bomb detonated: (50, 150)" ) #rounded to nearest int
-
-
 
 
 
@@ -88,9 +90,21 @@ for j in range (num_of_iterations):   #moves the coords num of iteration times
 #print (particles) # 2D list of particles after stepping
 
 
-
 #plotting all particles after spreading on a scatter graph
 for i in range (num_of_particles):
     #get ith obj from particles list, using Particles Class to specify x, y coords
     matplotlib.pyplot.scatter (particles[i].x, particles[i].y) 
 matplotlib.pyplot.show() 
+
+
+# #Outputting end locations of all particles after stepping as a text file
+f = open("particles_end.txt",'w') #builtin open func to write end coords to text file
+for line in particles: #for every line in particles list
+    f.write (repr(line)) #write as a string in the text file
+f.close()
+
+
+
+
+
+

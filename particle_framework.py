@@ -65,7 +65,7 @@ class Particle:
                 self.height = self.height - 1
                       
         elif (0 < self.height < 75):   #for particles below the building height
-            self.height = self.height - 1   #falls by 1m per sec
+            self.height = self.height - 1   #falls by 1m per sec until hits the ground at 0m
                    
             
                
