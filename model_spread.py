@@ -5,9 +5,12 @@ Created on Sat Oct 10 11:40:25 2020
 @author: shiva
 """
 import csv #to allow raster data to be read
-import matplotlib.pyplot #for plotting spread 
-import particle_framework #the particle class created 
 import random   #for random number generating
+import matplotlib.pyplot as plt #for plotting spread 
+import particle_framework #the particle class created 
+import numpy as np #for plotting density?
+
+
 
 
 #'fix' the random numbers so outputs stay constant, can change the seed arg
@@ -31,22 +34,22 @@ f.close() 	#file closed after reading data
 
 
 # Plotting the raster data
-matplotlib.pyplot.ylim (0, 300) #setting graph axis 300x300 to match raster
-matplotlib.pyplot.xlim (0, 300)
-matplotlib.pyplot.title ('A plot to show the map of the town and the bombing location')
-matplotlib.pyplot.xlabel('x metres') #graph axis labels, 1 pixel = 1 metre
-matplotlib.pyplot.ylabel('y metres')
+plt.ylim (0, 300) #setting graph axis 300x300 to match raster
+plt.xlim (0, 300)
+plt.title ('A plot to show the map of the town and the bombing location')
+plt.xlabel('x metres') #graph axis labels, 1 pixel = 1 metre
+plt.ylabel('y metres')
 #mark the bomb location with a red diamond overlay 
-matplotlib.pyplot.scatter (50, 150, color='red', marker=('D'))
+plt.scatter (50, 150, color='red', marker=('D'))
 #plotting map of the area/town and bombing location
-matplotlib.pyplot.imshow(town) 
+plt.imshow(town) 
 print ("Coords of building where bomb detonated: (50, 150)") #rounded to int
 
 
 
 # Major model parameters
 # TODO ALLOW ADJUSTMENT FROM CMD PROMPT OR JUPYTER NOTEBOOK
-num_of_particles = 5000
+num_of_particles = 500
 num_of_iterations = 100 #i.e after 700 seconds, 11mins
 
 #Chances/probability of wind blowing particle in different directions
@@ -91,19 +94,19 @@ for j in range (num_of_iterations):   #moves the coords num of iteration times
         particles[i].spread(p_east, p_west, p_north, p_south) #NESW movement
         particles[i].turbulance(p_rise, p_same, p_fall) #up/down movement
         #print (particles[i].height) #test to see turbulance method working
-#print("Particles after moving:") #comment out for large no's of particles
-#print (particles) # 2D list of particles after stepping
+#print("Particles after spreading:") #comment out for large no's of particles
+#print (particles) # 2D list/array of particles at their end locations 
 
 
 # Plotting all particles after spreading on a scatter plot
 for i in range (num_of_particles):
     #ith obj from particles list, using Particles Class to specify x, y coords
-    matplotlib.pyplot.scatter (particles[i].x, particles[i].y) 
-matplotlib.pyplot.show() 
+    plt.scatter (particles[i].x, particles[i].y) 
+plt.show() 
 
 
 # Outputting end locations of all particles, after stepping, as a text file
-f = open("particles_end.txt",'w') #builtin open func to write end coords
+f = open("particles_end.txt",'w', newline='') #builtin open func to write end coords
 for line in particles: #for every line in particles list
     f.write (repr(line)) #write as a string in the text file
 f.close() #file closed after writting the coords
@@ -113,5 +116,17 @@ f.close() #file closed after writting the coords
 
 
 
+# def density_plot ():
+#     plt.ylim (0, 300) #setting graph axis 300x300 to match raster
+#     plt.xlim (0, 300)
+#     plt.title ('A plot to show the map of the town and the bombing location')
+#     plt.xlabel('x metres') #graph axis labels, 1 pixel = 1 metre
+#     plt.ylabel('y metres')
+#     #mark the bomb location with a red diamond overlay 
+#     plt.scatter (50, 150, color='red', marker=('D'))
+#     #plotting map of the area/town and bombing location
+#     plt.imshow(town) 
+
+# density_plot()
 
 
