@@ -4,14 +4,14 @@ Created on Sat Oct 10 11:40:25 2020
 
 @author: shiva
 """
+# Import packages needed to run
 import csv #to allow raster data to be read
 import random   #for random number generating
 import matplotlib.pyplot as plt #for plotting spread 
 import particle_framework #the particle class created 
-# import numpy as np #for plotting density?
-# from scipy.stats import gaussian_kde
-import seaborn as sns
-import pandas as pd
+import pandas as pd #for density map data frame
+import seaborn as sns #for creating density map 
+
 
 
 
@@ -35,6 +35,7 @@ for row in dataset:
 f.close() 	#file closed after reading data
 
 
+
 # Plotting the raster data
 plt.ylim (0, 300) #setting graph axis 300x300 to match raster
 plt.xlim (0, 300)
@@ -51,7 +52,7 @@ print ("Coords of building where bomb detonated: (50, 150)") #rounded to int
 
 # Major model parameters
 # TODO ALLOW ADJUSTMENT FROM CMD PROMPT OR JUPYTER NOTEBOOK
-num_of_particles = 10
+num_of_particles = 5000
 num_of_iterations = 100 #i.e after 700 seconds, 11mins
 
 #Chances/probability of wind blowing particle in different directions
@@ -64,6 +65,7 @@ p_south = 10
 p_rise = 20 #20% chance particle rises 1m per second (1 pixel per iteration)
 p_same = 10 #particle stays at the same level
 p_fall = 70
+
 
 
 
@@ -84,7 +86,6 @@ for i in range(num_of_particles):
 
 
 
-
 print ("Spreading bomb particles--")
 # Particles spread across town either NESW directions and rise/fall 
 
@@ -97,7 +98,7 @@ for j in range (num_of_iterations):   #moves the coords num of iteration times
         particles[i].turbulance(p_rise, p_same, p_fall) #up/down movement
         #print (particles[i].height) #test to see turbulance method working
 #print("Particles after spreading:") #comment out for large no's of particles
-print (particles) # 2D list/array of particles at their end locations 
+#print (particles) # 2D list/array of particles at their end locations 
 
 
 # Plotting all particles after spreading on a scatter plot
@@ -105,13 +106,6 @@ for i in range (num_of_particles):
     #ith obj from particles list, using Particles Class to specify x, y coords
     plt.scatter (particles[i].x, particles[i].y) 
 plt.show() 
-
-
-# Outputting end locations of all particles, after stepping, as a text file
-f = open("particles_end.txt",'w', newline='') #builtin open func to write end coords
-for line in particles: #for every line in particles list
-    f.write (repr(line)) #write as a string in the text file
-f.close() #file closed after writting the coords
 
 
 
@@ -129,14 +123,30 @@ for i in range (num_of_particles):
 
 
 # Creating dictionary for x, y coords to use as pandas dataframe for density plot
-d = {'x': all_x_data,'y': all_y_data}  #creating the dictionary of 2 columns, call d in console to check dict made correctly
+d = {'x': all_x_data,'y': all_y_data} #creating the dictionary of 2 columns 
 
-#create pandas data frame from the dict
-df = pd.DataFrame(d) #can check by calling df in console
+# Create pandas data frame from the dict and output density map
+df = pd.DataFrame(d) #can check by calling d & df in console
 
-plt.figure()
-sns.kdeplot(df.x, df.y, cmap="Reds", shade=True, bw=.15)
-sns.plt.show()
+plt.figure() #create a 2nd figure output
+plt.title ('Density map of bacterial particles')
+plt.xlabel('x metres') #graph axis labels, 1 pixel = 1 metre
+plt.ylabel('y metres')
+
+# Density plot using seaborn, darker green = very dense, yellow = less dense
+density = sns.kdeplot(x= df.x, y= df.y, cmap='YlGn',shade=True,bw_method=0.5) 
+density.figure.savefig("density_map.png") #save as an image file
+
+
+
+# Save density map to file as text
+# Outputting end locations of all particles, after stepping, as a text file
+f = open("particles_end_density.txt",'w', newline='') #builtin open func to write end coords
+for line in particles: #for every line in particles list
+    f.write (repr(line)) #write as a string in the text file
+f.close() #file closed after writting the coords
+
+
 
 
 
