@@ -10,8 +10,8 @@ import matplotlib.pyplot as plt #for plotting spread
 import particle_framework #the particle class created 
 # import numpy as np #for plotting density?
 # from scipy.stats import gaussian_kde
-# import seaborn as sns
-# import pandas as pd
+import seaborn as sns
+import pandas as pd
 
 
 
@@ -126,9 +126,17 @@ for i in range (num_of_particles):
 #print(all_x_data)   #to test that the x & y coords list is made correctly
 #print(all_y_data)
 
+
+
 # Creating dictionary for x, y coords to use as pandas dataframe for density plot
 d = {'x': all_x_data,'y': all_y_data}  #creating the dictionary of 2 columns, call d in console to check dict made correctly
 
 #create pandas data frame from the dict
+df = pd.DataFrame(d) #can check by calling df in console
+
+plt.figure()
+sns.kdeplot(df.x, df.y, cmap="Reds", shade=True, bw=.15)
+sns.plt.show()
+
 
 
