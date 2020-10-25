@@ -8,8 +8,10 @@ import csv #to allow raster data to be read
 import random   #for random number generating
 import matplotlib.pyplot as plt #for plotting spread 
 import particle_framework #the particle class created 
-import numpy as np #for plotting density?
-
+# import numpy as np #for plotting density?
+# from scipy.stats import gaussian_kde
+# import seaborn as sns
+# import pandas as pd
 
 
 
@@ -49,7 +51,7 @@ print ("Coords of building where bomb detonated: (50, 150)") #rounded to int
 
 # Major model parameters
 # TODO ALLOW ADJUSTMENT FROM CMD PROMPT OR JUPYTER NOTEBOOK
-num_of_particles = 500
+num_of_particles = 10
 num_of_iterations = 100 #i.e after 700 seconds, 11mins
 
 #Chances/probability of wind blowing particle in different directions
@@ -95,7 +97,7 @@ for j in range (num_of_iterations):   #moves the coords num of iteration times
         particles[i].turbulance(p_rise, p_same, p_fall) #up/down movement
         #print (particles[i].height) #test to see turbulance method working
 #print("Particles after spreading:") #comment out for large no's of particles
-#print (particles) # 2D list/array of particles at their end locations 
+print (particles) # 2D list/array of particles at their end locations 
 
 
 # Plotting all particles after spreading on a scatter plot
@@ -114,19 +116,19 @@ f.close() #file closed after writting the coords
 
 
 
+# Creating separate lists for all x & y end locations for density plot
+all_x_data = []  #empty list for all x and y coords to go into
+all_y_data = [] 
+for i in range (num_of_particles):
+    #for every particle, add its corresponding x coord/y coord into the list 
+    all_x_data.append (particles[i].x)
+    all_y_data.append (particles[i].y)
+#print(all_x_data)   #to test that the x & y coords list is made correctly
+#print(all_y_data)
 
+# Creating dictionary for x, y coords to use as pandas dataframe for density plot
+d = {'x': all_x_data,'y': all_y_data}  #creating the dictionary of 2 columns, call d in console to check dict made correctly
 
-# def density_plot ():
-#     plt.ylim (0, 300) #setting graph axis 300x300 to match raster
-#     plt.xlim (0, 300)
-#     plt.title ('A plot to show the map of the town and the bombing location')
-#     plt.xlabel('x metres') #graph axis labels, 1 pixel = 1 metre
-#     plt.ylabel('y metres')
-#     #mark the bomb location with a red diamond overlay 
-#     plt.scatter (50, 150, color='red', marker=('D'))
-#     #plotting map of the area/town and bombing location
-#     plt.imshow(town) 
-
-# density_plot()
+#create pandas data frame from the dict
 
 
