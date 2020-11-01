@@ -108,6 +108,11 @@ for i in range (num_of_particles):
 plt.show() 
 
 
+# Outputting end locations of all particles, after stepping, as a text file
+f = open("end_locations.txt",'w', newline='') #builtin open func to write end coords
+for line in particles: #for every line in particles list
+    f.write (repr(line)) #write as a string in the text file
+f.close() #file closed after writting the coords
 
 
 # Creating separate lists for all x & y end locations for density plot
@@ -139,14 +144,14 @@ density.figure.savefig("density_map.png") #save as an image file
 
 
 
-# Save density map to file as text
-# Outputting end locations of all particles, after stepping, as a text file
-f = open("particles_end_density.txt",'w', newline='') #builtin open func to write end coords
-for line in particles: #for every line in particles list
-    f.write (repr(line)) #write as a string in the text file
-f.close() #file closed after writting the coords
+# TODO Save density map to file as text
+# import arcpy
 
+# inFeatures = "particles_end_density.txt"
+# valField = ""
+# outRaster = "density_raster.txt"
+# assignmentType = "COUNT"
+# priorityField = ""
+# cellSize = 3000
 
-
-
-
+# arcpy.PointToRaster_conversion (inFeatures, valField, outRaster, assignmentType, priorityField, cellSize)
