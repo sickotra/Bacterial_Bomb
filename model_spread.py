@@ -37,6 +37,20 @@ f.close() 	#file closed after reading data
 
 
 
+# Locating the bomb detonation point
+counter = 0 #start a counter for the rows in the town list
+for row in town: #both for loops to check through every value in the 2D list
+    for value in row:
+        if value != 0: #if the value is not equal to zero, then set bomb coords 
+            bomb_x = row.index(value) #bomb x coord
+            bomb_y = counter 
+            #will print the coord of the only non zero pixel value (255)
+            print("Coords of the building where bomb detonated:",(bomb_x, bomb_y))
+    #step the row counter by 1 to loop through all rows until non zero found
+    counter += 1
+
+
+
 # Plotting the raster data
 plt.ylim (0, 300) #setting graph axis 300x300 to match raster
 plt.xlim (0, 300)
@@ -47,7 +61,7 @@ plt.ylabel('y metres')
 plt.scatter (50, 150, color='red', marker=('D'))
 #plotting map of the area/town and bombing location
 plt.imshow(town) 
-print ("Coords of building where bomb detonated: (50, 150)") #rounded to int
+
 
 
 
@@ -82,7 +96,7 @@ for i in range(num_of_particles):
     particles.append (particle_framework.Particle(town, particles, y, x)) 
     #TEST to see each part get part list, all the same starting point!
     #print (particles[i].particles)  
-#print ("Initial particles:") #comment out for large no's of agents
+#print ("Initial particles:") #comment out for large no's of agents, TEST
 #print (particles) #prints list of all initial agents at (50,150) bomb location
 
 
@@ -97,15 +111,18 @@ for j in range (num_of_iterations):   #moves the coords num of iteration times
     for i in range (num_of_particles): 
         particles[i].spread(p_east, p_west, p_north, p_south) #NESW movement
         particles[i].turbulance(p_rise, p_same, p_fall) #up/down movement
-        #print (particles[i].height) #test to see turbulance method working
+        #print (particles[i].height) #TEST to see turbulance method working
 #print("Particles after spreading:") #comment out for large no's of particles
-#print (particles) # 2D list/array of particles at their end locations 
-
+#print (particles) # 2D list/array of particles at their end locations, TEST 
+print ("All particles have now settled on the ground")
 
 # Plotting all particles after spreading on a scatter plot
 for i in range (num_of_particles):
     #ith obj from particles list, using Particles Class to specify x, y coords
     plt.scatter (particles[i].x, particles[i].y) 
+#figure caption
+txt= "Fig 1. End locations of "+str(num_of_particles)+" particles in the town after "+str(num_of_iterations)+" seconds"
+plt.figtext(0.5, 0.001, txt, wrap=True, horizontalalignment='center', fontsize=10)
 plt.show() 
 
 
@@ -135,9 +152,10 @@ d = {'x': all_x_data,'y': all_y_data} #creating the dictionary of 2 columns
 df = pd.DataFrame(d) #can check by calling d & df in console
 
 plt.figure() #create a 2nd figure output
-plt.title ('Density map of bacterial particles')
+plt.title ('Density map of ' +str(num_of_particles)+' bacterial particles')
 plt.xlabel('x metres') #graph axis labels, 1 pixel = 1 metre
 plt.ylabel('y metres')
+
 
 # Density plot using seaborn, darker green = very dense, yellow = less dense
 density = sns.kdeplot(x= df.x, y= df.y, cmap='YlGn',shade=True,bw_method=0.5) 
@@ -161,4 +179,3 @@ f.close() #close the file
 
 # The output text file will have 0's where no particles are present,
 # and e.g a pixel value of 20 when 20 particles are present,density is retained      
-        
