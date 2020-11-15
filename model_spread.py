@@ -53,8 +53,8 @@ print ("Coords of building where bomb detonated: (50, 150)") #rounded to int
 
 # Major model parameters
 # TODO ALLOW ADJUSTMENT FROM CMD PROMPT OR JUPYTER NOTEBOOK
-num_of_particles = 50
-num_of_iterations = 10 #i.e after 700 seconds, 11mins
+num_of_particles = 5000
+num_of_iterations = 100 #i.e after 700 seconds, 11mins
 
 #Chances/probability of wind blowing particle in different directions
 p_east = 75  #75 means 75% chance particle moves east each second/iteration 
@@ -145,17 +145,20 @@ density.figure.savefig("density_map.png") #save as an image file
 
 
 
-# TODO Save density map to file as text// Cant load arcpy, ArcGIS Pro installed
-#import arcpy
 
+# Save density map to file as text
+for i in range (num_of_particles):  #for every particle
+    #for every particles y, x coords in the town, add 1 to the town pixel.
+    #the town pixel values will represent the no of particles/density there
+    town[particles[i].y][particles[i].x] += 1 
 
-# inFeatures = "end_locations.txt"
-# valField = ""
-# outRaster = "density_raster.txt"
-# assignmentType = "COUNT"
-# priorityField = ""
-# cellSize = 3000
+f = open('density_map_text.txt', 'w', newline='') #create new text file
+writer = csv.writer(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)
+#for every row in the town list, write that row to the new txt file
+for line in town:
+    writer.writerow(line) 
+f.close() #close the file
 
-# arcpy.PointToRaster_conversion (inFeatures, valField, outRaster, assignmentType, priorityField, cellSize)
-
-#rasterstats, rasterio?
+# The output text file will have 0's where no particles are present,
+# and e.g a pixel value of 20 when 20 particles are present,density is retained      
+        
