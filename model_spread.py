@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt #for plotting spread
 import particle_framework #the particle class created 
 import pandas as pd #for density map data frame
 import seaborn as sns #for creating density map 
+import time
 
 #'fix' the random numbers so outputs stay constant, can change the seed arg
 random.seed(0)
@@ -68,7 +69,7 @@ plt.imshow(town)
 # Major model parameters
 # TODO ALLOW ADJUSTMENT FROM CMD PROMPT OR JUPYTER NOTEBOOK
 num_of_particles = 5000
-num_of_iterations = 100 #i.e after 700 seconds, 11mins
+#FIXME foor timings 700 seconds, 11mins
 
 #Chances/probability of wind blowing particle in different directions
 p_east = 75  #75 means 75% chance particle moves east each second/iteration 
@@ -103,34 +104,32 @@ for i in range(num_of_particles):
 
 print ("Spreading bomb particles--")
 # Particles spread across town either NESW directions and rise/fall 
-
-# for j in range (num_of_iterations):   #moves the coords num of iteration times
-#     #randomly shuffle particles list each iternation to reduce model artifacts
-#     random.shuffle (particles) 
-#     #methods in Particles class act on every element in particles list
-#     for i in range (num_of_particles): 
-#         particles[i].spread(p_east, p_west, p_north, p_south) #NESW movement
-#         particles[i].turbulance(p_rise, p_same, p_fall) #up/down movement
-
-
+start = time.perf_counter() #start clock to assess efficiency 
     
-#methods in Particles class act on every element in particles list
+#Methods in Particles class act on every element in particles list
 for i in range (num_of_particles): 
+    
     #only run methods when the height of the particle is not 0 ie. not on ground
+    seconds_count = 0 #to count the no of seconds/times while loop runs
     while particles[i].height != 0:
+        seconds_count += 1 #increment by 1 every loop iteration, 1 iter = 1 sec
         particles[i].spread(p_east, p_west, p_north, p_south) #NESW movement
         particles[i].turbulance(p_rise, p_same, p_fall) #up/down movement
     #print (particles[i].height) #TEST to see turbulance method working
 #print("Particles after spreading:") #comment out for large no's of particles
 #print (particles) # 2D list/array of particles at their end locations, TEST 
+
+end = time.perf_counter() #end the timer for the calculating distances loops
 print ("All particles have now settled on the ground")
+print ("Time taken to calculate particles reaching ground = " + str (end - start))
+print ("Time taken for particles to actually hit the ground in the town = "+str(seconds_count)+" seconds")
 
 # Plotting all particles after spreading on a scatter plot
 for i in range (num_of_particles):
     #ith obj from particles list, using Particles Class to specify x, y coords
     plt.scatter (particles[i].x, particles[i].y) 
 #figure caption
-txt= "Fig 1. End locations of "+str(num_of_particles)+" particles in the town after "+str(num_of_iterations)+" seconds"
+txt= "Fig 1. End locations of "+str(num_of_particles)+" particles in the town after "+str(seconds_count)+" seconds"
 plt.figtext(0.5, 0.001, txt, wrap=True, horizontalalignment='center', fontsize=10)
 plt.show() 
 
@@ -140,6 +139,8 @@ f = open("end_locations.txt",'w', newline='') #builtin open func to write end co
 for line in particles: #for every line in particles list
     f.write (repr(line)) #write as a string in the text file
 f.close() #file closed after writting the coords
+
+
 
 
 # Creating separate lists for all x & y end locations for density plot
