@@ -104,14 +104,23 @@ for i in range(num_of_particles):
 print ("Spreading bomb particles--")
 # Particles spread across town either NESW directions and rise/fall 
 
-for j in range (num_of_iterations):   #moves the coords num of iteration times
-    #randomly shuffle particles list each iternation to reduce model artifacts
-    random.shuffle (particles) 
-    #methods in Particles class act on every element in particles list
-    for i in range (num_of_particles): 
+# for j in range (num_of_iterations):   #moves the coords num of iteration times
+#     #randomly shuffle particles list each iternation to reduce model artifacts
+#     random.shuffle (particles) 
+#     #methods in Particles class act on every element in particles list
+#     for i in range (num_of_particles): 
+#         particles[i].spread(p_east, p_west, p_north, p_south) #NESW movement
+#         particles[i].turbulance(p_rise, p_same, p_fall) #up/down movement
+
+
+    
+#methods in Particles class act on every element in particles list
+for i in range (num_of_particles): 
+    #only run methods when the height of the particle is not 0 ie. not on ground
+    while particles[i].height != 0:
         particles[i].spread(p_east, p_west, p_north, p_south) #NESW movement
         particles[i].turbulance(p_rise, p_same, p_fall) #up/down movement
-        #print (particles[i].height) #TEST to see turbulance method working
+    #print (particles[i].height) #TEST to see turbulance method working
 #print("Particles after spreading:") #comment out for large no's of particles
 #print (particles) # 2D list/array of particles at their end locations, TEST 
 print ("All particles have now settled on the ground")
