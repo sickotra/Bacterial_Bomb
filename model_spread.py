@@ -52,8 +52,8 @@ print ("Coords of building where bomb detonated: (50, 150)") #rounded to int
 
 # Major model parameters
 # TODO ALLOW ADJUSTMENT FROM CMD PROMPT OR JUPYTER NOTEBOOK
-num_of_particles = 5000
-num_of_iterations = 100 #i.e after 700 seconds, 11mins
+num_of_particles = 50
+num_of_iterations = 10 #i.e after 700 seconds, 11mins
 
 #Chances/probability of wind blowing particle in different directions
 p_east = 75  #75 means 75% chance particle moves east each second/iteration 
@@ -144,10 +144,11 @@ density.figure.savefig("density_map.png") #save as an image file
 
 
 
-# TODO Save density map to file as text
-# import arcpy
+# TODO Save density map to file as text// Cant load arcpy, ArcGIS Pro installed
+#import arcpy
 
-# inFeatures = "particles_end_density.txt"
+
+# inFeatures = "end_locations.txt"
 # valField = ""
 # outRaster = "density_raster.txt"
 # assignmentType = "COUNT"
@@ -155,3 +156,5 @@ density.figure.savefig("density_map.png") #save as an image file
 # cellSize = 3000
 
 # arcpy.PointToRaster_conversion (inFeatures, valField, outRaster, assignmentType, priorityField, cellSize)
+
+#rasterstats, rasterio?
