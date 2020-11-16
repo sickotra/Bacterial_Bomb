@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt #for plotting spread
 import particle_framework #the particle class created 
 import pandas as pd #for density map data frame
 import seaborn as sns #for creating density map 
-import time
+import time  #to time spreading of particles
 
 #'fix' the random numbers so outputs stay constant, can change the seed arg
 random.seed(0)
@@ -67,20 +67,18 @@ plt.imshow(town)
 
 
 # Major model parameters
-# TODO ALLOW ADJUSTMENT FROM CMD PROMPT OR JUPYTER NOTEBOOK
 num_of_particles = 5000
-#FIXME foor timings 700 seconds, 11mins
 
 #Chances/probability of wind blowing particle in different directions
 p_east = 75  #75 means 75% chance particle moves east each second/iteration 
-p_west = 5   #NESW probs can be integer or decimal/float, just need sum = 100
-p_north = 10
+p_west = 5   #NESW probs can be integer or decimal/float, but will only use int
+p_north = 10 #just need sum = 100
 p_south = 10
 
 #Chances of wind turbulance effects 
 p_rise = 20 #20% chance particle rises 1m per second (1 pixel per iteration)
 p_same = 10 #particle stays at the same level
-p_fall = 70 #probs can be integer or decimal/float, just need sum = 100
+p_fall = 70 #use integers, just need sum = 100
 
 
 
@@ -112,6 +110,7 @@ for i in range (num_of_particles):
     #only run methods when the height of the particle is not 0 ie. not on ground
     seconds_count = 0 #to count the no of seconds/times while loop runs
     while particles[i].height != 0:
+        
         seconds_count += 1 #increment by 1 every loop iteration, 1 iter = 1 sec
         particles[i].spread(p_east, p_west, p_north, p_south) #NESW movement
         particles[i].turbulance(p_rise, p_same, p_fall) #up/down movement
@@ -135,7 +134,7 @@ plt.show()
 
 
 # Outputting end locations of all particles, after stepping, as a text file
-f = open("end_locations.txt",'w', newline='') #builtin open func to write end coords
+f = open("outputs/end_locations.txt",'w', newline='') #builtin open func to write end coords
 for line in particles: #for every line in particles list
     f.write (repr(line)) #write as a string in the text file
 f.close() #file closed after writting the coords
@@ -169,7 +168,7 @@ plt.ylabel('y metres')
 
 # Density plot using seaborn, darker green = very dense, yellow = less dense
 density = sns.kdeplot(x= df.x, y= df.y, cmap='YlGn',shade=True,bw_method=0.5) 
-density.figure.savefig("density_map.png") #save as an image file
+density.figure.savefig("outputs/density_map.png") #save as an image file
 
 
 
@@ -180,7 +179,7 @@ for i in range (num_of_particles):  #for every particle
     #the town pixel values will represent the no of particles/density there
     town[particles[i].y][particles[i].x] += 1 
 
-f = open('density_map_text.txt', 'w', newline='') #create new text file
+f = open('outputs/density_map_text.txt', 'w', newline='') #create new text file
 writer = csv.writer(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)
 #for every row in the town list, write that row to the new txt file
 for line in town:

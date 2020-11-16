@@ -59,13 +59,13 @@ class Particle:
 
         Parameters
         ----------
-        p_east : int or float.
+        p_east : int.
             Variable for percentage probability of particle moving east.
-        p_west : int or float.
+        p_west : int.
             Variable for percentage probability of particle moving west.
-        p_north : int or float.
+        p_north : int.
             Variable for percentage probability of particle moving north.
-        p_south : int or float.
+        p_south : int.
             Variable for percentage probability of particle moving south.
 
         Returns
@@ -108,12 +108,12 @@ class Particle:
 
         Parameters
         ----------
-        p_rise : int or float.
+        p_rise : int.
             Variable for percentage probability of particle rising upwards.
-        p_same : int or float.
+        p_same : int.
             Variable for percentage probability of particle remaining at the 
             same level.
-        p_fall : int or float.
+        p_fall : int.
             Variable for percentage probability of particle falling downwards.
 
         Returns
