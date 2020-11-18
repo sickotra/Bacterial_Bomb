@@ -16,6 +16,9 @@ import particle_framework #the particle class created
 import pandas as pd #for density map data frame
 import seaborn as sns #for creating density map 
 import time  #to time spreading of particles
+import bact_bomb_gui as gui
+from tkinter import *
+
 
 #'fix' the random numbers so outputs stay constant, can change the seed arg
 random.seed(0)
@@ -190,31 +193,10 @@ f.close() #close the file
 # The output text file will have 0's where no particles are present,
 # and e.g a pixel value of 20 when 20 particles are present,density is retained      
 
-
-
-#TODO GUI ATTEMPT
-
-import tkinter as tk
-# Creating GUI
-
-#main window
-root = tk.Toplevel() #build main window using tkinter
-root.wm_title ("Bacterial Bomb") #sets title for main window
-root.geometry("1000x500")
-root.configure(background = "green")
-
-#create a label to add title text onto window
-txt1 = tk.Label (root, text = "Bacterial Bomb - Model to Track Contamination",      
-                 fg = "light green",
-                 bg = "black",
-                 font = "Helvetica 20 bold italic")
-txt1.pack() #put label onto window
-
-#add image to window
-logo = tk.PhotoImage(file="jupyter_cover_image1.gif")
-w1 = tk.Label(root, image=logo).pack(side="top")
-
-root.mainloop() #tkinter event loop to open window
-
+#--------------------------UNCOMMENT AT THE END--------------------------------
+# #Call GUI class
+# root = Toplevel() #the main window
+# GUI = gui.BactBombGUI(root) #from gui module use method
+# root.mainloop() #run the code
 
 
