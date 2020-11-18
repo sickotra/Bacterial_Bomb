@@ -123,6 +123,7 @@ print ("All particles have now settled on the ground")
 print ("Time taken to calculate particles reaching ground = " + str (end - start))
 print ("Time taken for particles to actually hit the ground in the town = "+str(seconds_count)+" seconds")
 
+
 # Plotting all particles after spreading on a scatter plot
 for i in range (num_of_particles):
     #ith obj from particles list, using Particles Class to specify x, y coords
@@ -188,3 +189,32 @@ f.close() #close the file
 
 # The output text file will have 0's where no particles are present,
 # and e.g a pixel value of 20 when 20 particles are present,density is retained      
+
+
+
+#TODO GUI ATTEMPT
+
+import tkinter as tk
+# Creating GUI
+
+#main window
+root = tk.Toplevel() #build main window using tkinter
+root.wm_title ("Bacterial Bomb") #sets title for main window
+root.geometry("1000x500")
+root.configure(background = "green")
+
+#create a label to add title text onto window
+txt1 = tk.Label (root, text = "Bacterial Bomb - Model to Track Contamination",      
+                 fg = "light green",
+                 bg = "black",
+                 font = "Helvetica 20 bold italic")
+txt1.pack() #put label onto window
+
+#add image to window
+logo = tk.PhotoImage(file="jupyter_cover_image1.gif")
+w1 = tk.Label(root, image=logo).pack(side="top")
+
+root.mainloop() #tkinter event loop to open window
+
+
+
