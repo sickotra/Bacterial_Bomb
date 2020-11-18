@@ -11,6 +11,26 @@ Created on Mon Oct 12 15:26:42 2020
 import random  #for random number generating 
 
 class Particle:
+    """
+    Particle Class:
+        A class to give attributes and behaviours to an abstract particle.
+        
+    Constructor arguements:
+        town -- 2D list containing the area particles will be in.
+        particles -- a list of all the particles in the town.
+        y -- y coord before init method sets particles' coods.
+        x -- x coord before init method sets particles' coods.
+    
+    Particle characteristics:
+        - height
+        - y coordinate
+        - x coordinate 
+        
+    Particle behaviours:
+        - spread
+        - turbulance
+    
+    """
     
     def __init__(self, town, particles, y, x):
         """
@@ -171,8 +191,6 @@ class Particle:
             self._height = self._height - 1  #falls until hits the ground at 0m
                    
             
-               
-
         
    
    
