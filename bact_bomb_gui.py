@@ -62,10 +62,10 @@ class BactBombGUI:
                             " North = 10%,    South = 10%",
                             font = "Helvetica 12",
                             fg = "black",
-                            bg = "green",
+                            bg = "chartreuse3",
                             highlightcolor = "white",
                             bd = "1.5")
-        self.label2.place(relx=0.3, rely=0.76, anchor=CENTER)
+        self.label2.pack()
                             
         self.default_button = Button(master,
                                      text = "Run with default parameters",
@@ -74,34 +74,8 @@ class BactBombGUI:
                                      bg = "gray43",
                                      relief =RAISED,
                                      command = self.defaults) 
-        self.default_button.place(relx=0.3, rely=0.89, anchor=CENTER)
+        self.default_button.pack()
         
-        
-        
-        # slider for the number of particles
-        self.particle_scale = Scale(master, variable = DoubleVar(), 
-                           from_=0, to=5000,  #range
-                           orient = HORIZONTAL, 
-                           fg = "black", #text colour
-                           bg = "green", #background col
-                           bd = "1.5",   #border width
-                           font = "Helvetica",
-                           highlightcolor = "light green",
-                           sliderlength = 50,
-                           length = 200,
-                           label = "Number of Particles")
-        self.particle_scale.pack()
-        self.particle_scale.set(5000)
-        self.particle_scale.place(relx=0.7, rely=0.75, anchor=CENTER)
-        
-        # button to set number of particles
-        self.particle_button = Button(master,
-                                      font = "Helvetica 12 bold",
-                                      text = "Set number of particles",
-                                      fg = "light green",
-                                      bg = "gray43",
-                                      relief =RAISED) #command removed
-        self.particle_button.place(relx=0.7, rely=0.89, anchor=CENTER)
         
         
         # exit the gui
@@ -114,6 +88,8 @@ class BactBombGUI:
                                   command=self.Quit)
         self.QUIT_button.place(relx=0.95, rely=0.95, anchor=CENTER)
     
+    
+    
         # help text file    
         self.HELP_button = Button(master,
                                   font = "Helvetica 12 bold",
@@ -125,10 +101,6 @@ class BactBombGUI:
         self.HELP_button.place(relx=0.05, rely=0.95, anchor=CENTER)
         
 
-
-    #TODO THIS FUNC NEEDS FIXING, ADD COMMAND TO BUTTON
-    # def select_particle_no(self, model_spread):  #the func that runs when button clicked
-        #model_spread.num_of_particles = int(particle_scale.get())
         
     
     def defaults(self):
