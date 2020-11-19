@@ -7,3 +7,5 @@ A method still needs to be created for the button command. The method should tak
 * A desktop icon to run the GUI could be created so that running to program is made easier for the user
 
 * A 3D animation to show the particles being spread could be created.
+
+* Make the console output display on the GUI
