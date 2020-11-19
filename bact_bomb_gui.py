@@ -2,15 +2,15 @@
 """
 Programming for Social Science - Assignment 2.
 GUI Class and code to execute.
-Created on Wed Nov 18 20:21:20 2020
 
+Created on Wed Nov 18 20:21:20 2020
 @author: Shivani Sickotra
+
 """
 
 from tkinter import *  #import all from tkinter for the GUI
 import runpy #to run the model spread main program
-import os
-
+import os #to open help file
 
 
 class BactBombGUI:
@@ -28,16 +28,15 @@ class BactBombGUI:
     """
     
     def __init__(self, master):
-        """
-        Construct the labels and buttons that will appear on the GUI.
-        """
+        """Construct the labels and buttons that will appear on the GUI."""
+        
         self.master = master
         master.title("Bacterial Bomb") #set the title, window size, bg colour
         master.geometry("1000x500")
         master.configure(background = "green")
         
-    
-        #title displayed on window
+        
+        # Title displayed on window
         self.Title_label = Label(master,    # title text on the window
                                  text="Bacterial Bomb - Model to Track Contamination",
                                  fg = "light green",
@@ -46,15 +45,13 @@ class BactBombGUI:
         self.Title_label.pack() #add to main window
         
         
-        
-        #image displayed on window
+        # Image displayed on window
         self.logo = PhotoImage(file="jupyter_cover_image1.gif") #image to add
         self.label1 = Label(master, image=self.logo) #label to add the image
         self.label1.pack()
         
         
-        
-        #run program with defaults text & button
+        # Run program with defaults
         self.label2 = Label(master, 
                             text = "The default parameters are:\n"
                             "Number of Particles = 5000\n Wind directions -\n"
@@ -77,8 +74,7 @@ class BactBombGUI:
         self.default_button.pack()
         
         
-        
-        # exit the gui
+        # Exit the GUI
         self.QUIT_button = Button(master,
                                   font = "Helvetica 12 bold",
                                   text="QUIT",
@@ -89,8 +85,7 @@ class BactBombGUI:
         self.QUIT_button.place(relx=0.95, rely=0.95, anchor=CENTER)
     
     
-    
-        # help text file    
+        # Help text file    
         self.HELP_button = Button(master,
                                   font = "Helvetica 12 bold",
                                   text="HELP",
@@ -100,9 +95,7 @@ class BactBombGUI:
                                   command=self.Help)
         self.HELP_button.place(relx=0.05, rely=0.95, anchor=CENTER)
         
-
         
-    
     def defaults(self):
         """Run the main model file."""
         runpy.run_path("model_spread.py")

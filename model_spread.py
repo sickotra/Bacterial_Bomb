@@ -16,8 +16,6 @@ import particle_framework #the particle class created
 import pandas as pd #for density map data frame
 import seaborn as sns #for creating density map 
 import time  #to time spreading of particles
-#import bact_bomb_gui as gui
-#from tkinter import *
 
 
 #'fix' the random numbers so outputs stay constant, can change the seed arg
@@ -70,18 +68,23 @@ plt.imshow(town)
 
 
 # Major model parameters
-num_of_particles = 5000
+num_of_particles = 5000    #total no of particles
+print ("Number of particles =", num_of_particles)
 
 #Chances/probability of wind blowing particle in different directions
 p_east = 75  #75 means 75% chance particle moves east each second/iteration 
 p_west = 5   #NESW probs can be integer or decimal/float, but will only use int
 p_north = 10 #just need sum = 100
 p_south = 10
+print ("Wind directions:\n", "East =", p_east,"%", "  West =", p_west,"%",
+       "  North =", p_north,"%", "  South =", p_south,"%")
 
 #Chances of wind turbulance effects 
 p_rise = 20 #20% chance particle rises 1m per second (1 pixel per iteration)
 p_same = 10 #particle stays at the same level
 p_fall = 70 #use integers, just need sum = 100
+print ("Turbulance probabilities:\n", "Rise =", p_rise,"%",
+       "  Remain same level =", p_same,"%", "  Fall =", p_fall,"%")
 
 
 
@@ -123,8 +126,9 @@ for i in range (num_of_particles):
 
 end = time.perf_counter() #end the timer for the calculating distances loops
 print ("All particles have now settled on the ground")
-print ("Time taken to calculate particles reaching ground = " + str (end - start))
-print ("Time taken for particles to actually hit the ground in the town = "+str(seconds_count)+" seconds")
+print ("Time taken to calculate particles reaching ground = " + str (end-start))
+print ("Time taken for particles to actually hit the ground in the town = "
+       +str(seconds_count)+" seconds")
 
 
 # Plotting all particles after spreading on a scatter plot
@@ -138,7 +142,7 @@ plt.show()
 
 
 # Outputting end locations of all particles, after stepping, as a text file
-f = open("outputs/end_locations.txt",'w', newline='') #builtin open func to write end coords
+f = open("outputs/end_locations.txt",'w', newline='') #open the file to write
 for line in particles: #for every line in particles list
     f.write (repr(line)) #write as a string in the text file
 f.close() #file closed after writting the coords
@@ -158,7 +162,7 @@ for i in range (num_of_particles):
 
 
 
-# Creating dictionary for x, y coords to use as pandas dataframe for density plot
+# Creating dictionary for x,y coords to use as pandas dataframe for density plot
 d = {'x': all_x_data,'y': all_y_data} #creating the dictionary of 2 columns 
 
 # Create pandas data frame from the dict and output density map
@@ -193,10 +197,6 @@ f.close() #close the file
 # The output text file will have 0's where no particles are present,
 # and e.g a pixel value of 20 when 20 particles are present,density is retained      
 
-# #--------------------------UNCOMMENT AT THE END--------------------------------
-# #Call GUI class
-# root = Toplevel() #the main window
-# GUI = gui.BactBombGUI(root) #from gui module use method
-# root.mainloop() #run the code
+
 
 

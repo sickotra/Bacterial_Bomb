@@ -10,6 +10,7 @@ Created on Mon Oct 12 15:26:42 2020
 
 import random  #for random number generating 
 
+
 class Particle:
     """
     Particle Class:
@@ -61,7 +62,7 @@ class Particle:
         self._particles = particles #every particle access to 'particles' list
         self._height = 75 #all particles initial height = building height 75m 
         
-    
+
     # Accessor methods to protect variables, hidden vars
     def get_y (self):
         """Divert access of y int variable to a hidden int variable."""
@@ -100,7 +101,6 @@ class Particle:
         
         return str([self._x, self._y]) #used to print initial & moved particles
        
-    
     
     def spread(self, p_east, p_west, p_north, p_south):
         """
@@ -148,8 +148,7 @@ class Particle:
             self._x = 300  #stop from going any higher
         if self._y > 300:
             self._y = 300
-        
-            
+                
     
     def turbulance(self, p_rise, p_same, p_fall):
         """
