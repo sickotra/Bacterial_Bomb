@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """
+Programming for Social Science - Assignment 2.
+GUI Class and code to execute.
 Created on Wed Nov 18 20:21:20 2020
 
-@author: shiva
+@author: Shivani Sickotra
 """
 
 from tkinter import *  #import all from tkinter for the GUI
@@ -10,9 +12,25 @@ import runpy #to run the model spread main program
 import os
 
 
+
 class BactBombGUI:
+    """
+    BactBombGUI Class:
+        A class to create the GUI for the bacterial bomb model.
+        
+    Constructor arguements:
+        master -- the main application entry window 
+        
+    GUI features:
+        - Button to run model_spread.py file 
+        - Quit button
+        - Help button
+    """
     
     def __init__(self, master):
+        """
+        Construct the labels and buttons that will appear on the GUI.
+        """
         self.master = master
         master.title("Bacterial Bomb") #set the title, window size, bg colour
         master.geometry("1000x500")
@@ -108,26 +126,28 @@ class BactBombGUI:
         
 
 
-
-    def select_particle_no(self, num_of_particles):  #the func that runs when button clicked
+    #TODO THIS FUNC NEEDS FIXING, ADD COMMAND TO BUTTON
+    # def select_particle_no(self, model_spread):  #the func that runs when button clicked
+        #model_spread.num_of_particles = int(particle_scale.get())
         
-        num_of_particles = int(particle_scale.get())
-        return num_of_particles
     
     def defaults(self):
+        """Run the main model file."""
         runpy.run_path("model_spread.py")
         
     def Quit(self):
+        """"Close the GUI window."""
         root.destroy()
    
     def Help(self):
+        """Open the help text file."""
         readme = "gui_help.txt"
         os.startfile(readme)
         
         
     
-# #---------- DELETE AFTERWARDS, use in main program --------  
-# root = Toplevel()
+# #--------------------- Display the GUI------------------------  
+root = Toplevel()
 
-# GUI = BactBombGUI(root)
-# root.mainloop()
+GUI = BactBombGUI(root)
+root.mainloop()
