@@ -1,0 +1,19 @@
+
+Bacterial Bomb Model - HELP
+--------------------------------
+
+
+The model can be run with default parameters listed on the screen. 
+To use these parameters, click on the "Run with default parameters" button.
+
+The model can also run with the number of particles chosen using the slider.
+To choose the total particles used in the model, set the slider to the desired number. 
+Click on the "Set number of particles" button and this will run the model with the chosen number.
+
+The outputs displayed in both cases will be two figures.
+The first will be a figure showing the spread of the bacterial particles in the town,
+with the bomb location marked by a red diamond. 
+The second will be a density map of the particles.
+
+A text file of the particle end coordinates and a text file representing the density map will
+also be saved to the working directory.

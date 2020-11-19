@@ -19,6 +19,7 @@ import time  #to time spreading of particles
 import bact_bomb_gui as gui
 from tkinter import *
 
+#num_of_particles = 5000
 
 #'fix' the random numbers so outputs stay constant, can change the seed arg
 random.seed(0)
@@ -194,9 +195,9 @@ f.close() #close the file
 # and e.g a pixel value of 20 when 20 particles are present,density is retained      
 
 #--------------------------UNCOMMENT AT THE END--------------------------------
-# #Call GUI class
-# root = Toplevel() #the main window
-# GUI = gui.BactBombGUI(root) #from gui module use method
-# root.mainloop() #run the code
+#Call GUI class
+root = Toplevel() #the main window
+GUI = gui.BactBombGUI(root) #from gui module use method
+root.mainloop() #run the code
 
 
