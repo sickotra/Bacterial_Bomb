@@ -12,8 +12,8 @@
 #
 import os
 import sys
-# sys.path.insert(0, os.path.abspath('.'))
-sys.path.append('C:\Users\shiva\Documents\Programming for Social Science\Bacterial_Bomb\Bacterial_Bomb\docs')
+sys.path.insert(0, os.path.abspath('...'))
+
 
 # -- Project information -----------------------------------------------------
 

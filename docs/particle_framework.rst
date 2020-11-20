@@ -1,7 +1,7 @@
-model\_spread\_docs module
+particle\_framework module
 ==========================
 
-.. automodule:: model_spread_docs
+.. automodule:: particle_framework
    :members:
    :undoc-members:
    :show-inheritance:

@@ -11,6 +11,7 @@ Welcome to Bacterial Bomb's documentation!
 
    model_spread
    particle_framework
+   bact_bomb_gui
 
 
 

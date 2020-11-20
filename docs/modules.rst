@@ -2,7 +2,8 @@ docs
 ====
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 5
 
-   model_spread_docs
-   particle_framework_docs
+   model_spread
+   particle_framework
+   bact_bomb_gui

@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>particle_framework module &#8212; Bacterial Bomb 1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="bact_bomb_gui module" href="bact_bomb_gui.html" />
+    <link rel="prev" title="model_spread module" href="model_spread.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-particle_framework">
+<span id="particle-framework-module"></span><h1>particle_framework module<a class="headerlink" href="#module-particle_framework" title="Permalink to this headline">¶</a></h1>
+<p>Programming for Social Science - Assignment 2.
+Bactrial Particle Class and code to execute.</p>
+<p>Created on Mon Oct 12 15:26:42 2020
+&#64;author: Shivani Sickotra</p>
+<dl class="py class">
+<dt id="particle_framework.Particle">
+<em class="property">class </em><code class="sig-prename descclassname">particle_framework.</code><code class="sig-name descname">Particle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">town</span></em>, <em class="sig-param"><span class="n">particles</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#particle_framework.Particle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="simple">
+<dt>Particle Class:</dt><dd><p>A class to give attributes and behaviours to an abstract particle.</p>
+</dd>
+<dt>Constructor arguements:</dt><dd><p>town – 2D list containing the area particles will be in.
+particles – a list of all the particles in the town.
+y – y coord before init method sets particles’ coods.
+x – x coord before init method sets particles’ coods.</p>
+</dd>
+<dt>Particle characteristics:</dt><dd><ul class="simple">
+<li><p>height</p></li>
+<li><p>y coordinate</p></li>
+<li><p>x coordinate</p></li>
+</ul>
+</dd>
+<dt>Particle behaviours:</dt><dd><ul class="simple">
+<li><p>spread</p></li>
+<li><p>turbulance</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="particle_framework.Particle.get_height">
+<code class="sig-name descname">get_height</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#particle_framework.Particle.get_height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divert access of height int variable to a hidden int variable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="particle_framework.Particle.get_x">
+<code class="sig-name descname">get_x</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#particle_framework.Particle.get_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divert access of x int variable to a hidden int variable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="particle_framework.Particle.get_y">
+<code class="sig-name descname">get_y</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#particle_framework.Particle.get_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divert access of y int variable to a hidden int variable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="particle_framework.Particle.height">
+<em class="property">property </em><code class="sig-name descname">height</code><a class="headerlink" href="#particle_framework.Particle.height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divert access of height int variable to a hidden int variable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="particle_framework.Particle.set_height">
+<code class="sig-name descname">set_height</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#particle_framework.Particle.set_height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divert mutation of height int variable to a hidden int variable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="particle_framework.Particle.set_x">
+<code class="sig-name descname">set_x</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#particle_framework.Particle.set_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divert mutation of x int variable to a hidden int variable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="particle_framework.Particle.set_y">
+<code class="sig-name descname">set_y</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#particle_framework.Particle.set_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divert mutation of y int variable to a hidden int variable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="particle_framework.Particle.spread">
+<code class="sig-name descname">spread</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p_east</span></em>, <em class="sig-param"><span class="n">p_west</span></em>, <em class="sig-param"><span class="n">p_north</span></em>, <em class="sig-param"><span class="n">p_south</span></em><span class="sig-paren">)</span><a class="headerlink" href="#particle_framework.Particle.spread" title="Permalink to this definition">¶</a></dt>
+<dd><p>Random walk particles 1 step in one of four directions, depending on
+direction probabilities assigned by user.</p>
+<dl class="simple">
+<dt>p_east<span class="classifier">int.</span></dt><dd><p>Variable for percentage probability of particle moving east.</p>
+</dd>
+<dt>p_west<span class="classifier">int.</span></dt><dd><p>Variable for percentage probability of particle moving west.</p>
+</dd>
+<dt>p_north<span class="classifier">int.</span></dt><dd><p>Variable for percentage probability of particle moving north.</p>
+</dd>
+<dt>p_south<span class="classifier">int.</span></dt><dd><p>Variable for percentage probability of particle moving south.</p>
+</dd>
+</dl>
+<p>None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="particle_framework.Particle.turbulance">
+<code class="sig-name descname">turbulance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p_rise</span></em>, <em class="sig-param"><span class="n">p_same</span></em>, <em class="sig-param"><span class="n">p_fall</span></em><span class="sig-paren">)</span><a class="headerlink" href="#particle_framework.Particle.turbulance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Random walk particles 1 step either up or down, depending on turbulance
+probabilities assigned by user, until all particles reach the ground.</p>
+<dl class="simple">
+<dt>p_rise<span class="classifier">int.</span></dt><dd><p>Variable for percentage probability of particle rising upwards.</p>
+</dd>
+<dt>p_same<span class="classifier">int.</span></dt><dd><p>Variable for percentage probability of particle remaining at the 
+same level.</p>
+</dd>
+<dt>p_fall<span class="classifier">int.</span></dt><dd><p>Variable for percentage probability of particle falling downwards.</p>
+</dd>
+</dl>
+<p>None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="particle_framework.Particle.x">
+<em class="property">property </em><code class="sig-name descname">x</code><a class="headerlink" href="#particle_framework.Particle.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divert access of x int variable to a hidden int variable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="particle_framework.Particle.y">
+<em class="property">property </em><code class="sig-name descname">y</code><a class="headerlink" href="#particle_framework.Particle.y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Divert access of y int variable to a hidden int variable.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Bacterial Bomb</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="model_spread.html">model_spread module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">particle_framework module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bact_bomb_gui.html">bact_bomb_gui module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="model_spread.html" title="previous chapter">model_spread module</a></li>
+      <li>Next: <a href="bact_bomb_gui.html" title="next chapter">bact_bomb_gui module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Shivani Sickotra.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/particle_framework.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

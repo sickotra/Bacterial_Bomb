@@ -15,6 +15,8 @@ import matplotlib.pyplot as plt #for plotting spread
 import particle_framework #the particle class created 
 import pandas as pd #for density map data frame
 import seaborn as sns #for creating density map 
+import time  #to time spreading of particles
+
 
 #'fix' the random numbers so outputs stay constant, can change the seed arg
 random.seed(0)
@@ -37,6 +39,20 @@ f.close() 	#file closed after reading data
 
 
 
+# Locating the bomb detonation point
+counter = 0 #start a counter for the rows in the town list
+for row in town: #both for loops to check through every value in the 2D list
+    for value in row:
+        if value != 0: #if the value is not equal to zero, then set bomb coords 
+            bomb_x = row.index(value) #bomb x coord
+            bomb_y = counter 
+            #will print the coord of the only non zero pixel value (255)
+            print("Coords of the building where bomb detonated:",(bomb_x, bomb_y))
+    #step the row counter by 1 to loop through all rows until non zero found
+    counter += 1
+
+
+
 # Plotting the raster data
 plt.ylim (0, 300) #setting graph axis 300x300 to match raster
 plt.xlim (0, 300)
@@ -47,25 +63,28 @@ plt.ylabel('y metres')
 plt.scatter (50, 150, color='red', marker=('D'))
 #plotting map of the area/town and bombing location
 plt.imshow(town) 
-print ("Coords of building where bomb detonated: (50, 150)") #rounded to int
+
 
 
 
 # Major model parameters
-# TODO ALLOW ADJUSTMENT FROM CMD PROMPT OR JUPYTER NOTEBOOK
-num_of_particles = 50
-num_of_iterations = 10 #i.e after 700 seconds, 11mins
+num_of_particles = 5000    #total no of particles
+print ("Number of particles =", num_of_particles)
 
 #Chances/probability of wind blowing particle in different directions
 p_east = 75  #75 means 75% chance particle moves east each second/iteration 
-p_west = 5   #NESW probs can be integer or decimal/float, just need sum = 100
-p_north = 10
+p_west = 5   #NESW probs can be integer or decimal/float, but will only use int
+p_north = 10 #just need sum = 100
 p_south = 10
+print ("Wind directions:\n", "East =", p_east,"%", "  West =", p_west,"%",
+       "  North =", p_north,"%", "  South =", p_south,"%")
 
 #Chances of wind turbulance effects 
 p_rise = 20 #20% chance particle rises 1m per second (1 pixel per iteration)
 p_same = 10 #particle stays at the same level
-p_fall = 70 #probs can be integer or decimal/float, just need sum = 100
+p_fall = 70 #use integers, just need sum = 100
+print ("Turbulance probabilities:\n", "Rise =", p_rise,"%",
+       "  Remain same level =", p_same,"%", "  Fall =", p_fall,"%")
 
 
 
@@ -82,38 +101,53 @@ for i in range(num_of_particles):
     particles.append (particle_framework.Particle(town, particles, y, x)) 
     #TEST to see each part get part list, all the same starting point!
     #print (particles[i].particles)  
-#print ("Initial particles:") #comment out for large no's of agents
+#print ("Initial particles:") #comment out for large no's of agents, TEST
 #print (particles) #prints list of all initial agents at (50,150) bomb location
 
 
 
 print ("Spreading bomb particles--")
 # Particles spread across town either NESW directions and rise/fall 
-
-for j in range (num_of_iterations):   #moves the coords num of iteration times
-    #randomly shuffle particles list each iternation to reduce model artifacts
-    random.shuffle (particles) 
-    #methods in Particles class act on every element in particles list
-    for i in range (num_of_particles): 
+start = time.perf_counter() #start clock to assess efficiency 
+    
+#Methods in Particles class act on every element in particles list
+for i in range (num_of_particles): 
+    
+    #only run methods when the height of the particle is not 0 ie. not on ground
+    seconds_count = 0 #to count the no of seconds/times while loop runs
+    while particles[i].height != 0:
+        
+        seconds_count += 1 #increment by 1 every loop iteration, 1 iter = 1 sec
         particles[i].spread(p_east, p_west, p_north, p_south) #NESW movement
         particles[i].turbulance(p_rise, p_same, p_fall) #up/down movement
-        #print (particles[i].height) #test to see turbulance method working
+    #print (particles[i].height) #TEST to see turbulance method working
 #print("Particles after spreading:") #comment out for large no's of particles
-#print (particles) # 2D list/array of particles at their end locations 
+#print (particles) # 2D list/array of particles at their end locations, TEST 
+
+end = time.perf_counter() #end the timer for the calculating distances loops
+print ("All particles have now settled on the ground")
+print ("Time taken to calculate particles reaching ground = " + str (end-start))
+print ("Time taken for particles to actually hit the ground in the town = "
+       +str(seconds_count)+" seconds")
 
 
 # Plotting all particles after spreading on a scatter plot
 for i in range (num_of_particles):
     #ith obj from particles list, using Particles Class to specify x, y coords
     plt.scatter (particles[i].x, particles[i].y) 
+#figure caption
+txt= "Fig 1. End locations of "+str(num_of_particles)+" particles in the town after "+str(seconds_count)+" seconds"
+plt.figtext(0.5, 0.001, txt, wrap=True, horizontalalignment='center', fontsize=10)
 plt.show() 
 
 
 # Outputting end locations of all particles, after stepping, as a text file
-f = open("end_locations.txt",'w', newline='') #builtin open func to write end coords
+f = open("outputs/end_locations.txt",'w', newline='') #open the file to write
 for line in particles: #for every line in particles list
     f.write (repr(line)) #write as a string in the text file
 f.close() #file closed after writting the coords
+
+
 
 
 # Creating separate lists for all x & y end locations for density plot
@@ -128,34 +162,41 @@ for i in range (num_of_particles):
 
 
 
-# Creating dictionary for x, y coords to use as pandas dataframe for density plot
+# Creating dictionary for x,y coords to use as pandas dataframe for density plot
 d = {'x': all_x_data,'y': all_y_data} #creating the dictionary of 2 columns 
 
 # Create pandas data frame from the dict and output density map
 df = pd.DataFrame(d) #can check by calling d & df in console
 
 plt.figure() #create a 2nd figure output
-plt.title ('Density map of bacterial particles')
+plt.title ('Density map of ' +str(num_of_particles)+' bacterial particles')
 plt.xlabel('x metres') #graph axis labels, 1 pixel = 1 metre
 plt.ylabel('y metres')
 
+
 # Density plot using seaborn, darker green = very dense, yellow = less dense
 density = sns.kdeplot(x= df.x, y= df.y, cmap='YlGn',shade=True,bw_method=0.5) 
-density.figure.savefig("density_map.png") #save as an image file
+density.figure.savefig("outputs/density_map.png") #save as an image file
 
 
 
-# TODO Save density map to file as text// Cant load arcpy, ArcGIS Pro installed
-#import arcpy
+
+# Save density map to file as text
+for i in range (num_of_particles):  #for every particle
+    #for every particles y, x coords in the town, add 1 to the town pixel.
+    #the town pixel values will represent the no of particles/density there
+    town[particles[i].y][particles[i].x] += 1 
+
+f = open('outputs/density_map_text.txt', 'w', newline='') #create new text file
+writer = csv.writer(f, delimiter=',', quoting=csv.QUOTE_NONNUMERIC)
+#for every row in the town list, write that row to the new txt file
+for line in town:
+    writer.writerow(line) 
+f.close() #close the file
+
+# The output text file will have 0's where no particles are present,
+# and e.g a pixel value of 20 when 20 particles are present,density is retained      
 
 
-# inFeatures = "end_locations.txt"
-# valField = ""
-# outRaster = "density_raster.txt"
-# assignmentType = "COUNT"
-# priorityField = ""
-# cellSize = 3000
 
-# arcpy.PointToRaster_conversion (inFeatures, valField, outRaster, assignmentType, priorityField, cellSize)
 
-#rasterstats, rasterio?
