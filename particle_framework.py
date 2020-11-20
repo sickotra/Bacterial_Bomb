@@ -29,7 +29,7 @@ class Particle:
         
     Particle behaviours:
         - spread
-        - turbulance
+        - turbulence
     
     """
     
@@ -150,9 +150,9 @@ class Particle:
             self._y = 300
                 
     
-    def turbulance(self, p_rise, p_same, p_fall):
+    def turbulence(self, p_rise, p_same, p_fall):
         """
-        Random walk particles 1 step either up or down, depending on turbulance
+        Random walk particles 1 step either up or down, depending on turbulence
         probabilities assigned by user, until all particles reach the ground.
 
         Parameters

@@ -46,7 +46,7 @@ class BactBombGUI:
         
         
         # Image displayed on window
-        self.logo = PhotoImage(file="jupyter_cover_image1.gif") #image to add
+        self.logo = PhotoImage(file="jupyter/logo.gif") #image to add
         self.label1 = Label(master, image=self.logo) #label to add the image
         self.label1.pack()
         

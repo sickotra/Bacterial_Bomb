@@ -24,7 +24,7 @@ random.seed(0)
 
 
 # Setting up town and identifying bombing location 
-f = open ('wind.raster', newline='') #read in data from raster file
+f = open ('inputs/wind.raster', newline='') #read in data from raster file
 #csv.reader gives data as list of list to be looped through
 dataset = csv.reader (f, quoting=csv.QUOTE_NONNUMERIC) #converts no. to floats
 
@@ -67,6 +67,7 @@ plt.imshow(town)
 
 
 
+
 # Major model parameters
 num_of_particles = 5000    #total no of particles
 print ("Number of particles =", num_of_particles)
@@ -79,7 +80,7 @@ p_south = 10
 print ("Wind directions:\n", "East =", p_east,"%", "  West =", p_west,"%",
        "  North =", p_north,"%", "  South =", p_south,"%")
 
-#Chances of wind turbulance effects 
+#Chances of wind turbulence effects 
 p_rise = 20 #20% chance particle rises 1m per second (1 pixel per iteration)
 p_same = 10 #particle stays at the same level
 p_fall = 70 #use integers, just need sum = 100
@@ -119,8 +120,8 @@ for i in range (num_of_particles):
         
         seconds_count += 1 #increment by 1 every loop iteration, 1 iter = 1 sec
         particles[i].spread(p_east, p_west, p_north, p_south) #NESW movement
-        particles[i].turbulance(p_rise, p_same, p_fall) #up/down movement
-    #print (particles[i].height) #TEST to see turbulance method working
+        particles[i].turbulence(p_rise, p_same, p_fall) #up/down movement
+    #print (particles[i].height) #TEST to see turbulence method working
 #print("Particles after spreading:") #comment out for large no's of particles
 #print (particles) # 2D list/array of particles at their end locations, TEST 
 
