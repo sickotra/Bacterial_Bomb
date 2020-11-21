@@ -16,6 +16,7 @@ import particle_framework #the particle class created
 import pandas as pd #for density map data frame
 import seaborn as sns #for creating density map 
 import time  #to time spreading of particles
+import sys
 
 
 #'fix' the random numbers so outputs stay constant, can change the seed arg
@@ -51,8 +52,6 @@ for row in town: #both for loops to check through every value in the 2D list
     #step the row counter by 1 to loop through all rows until non zero found
     counter += 1
 
-
-
 # Plotting the raster data
 plt.ylim (0, 300) #setting graph axis 300x300 to match raster
 plt.xlim (0, 300)
@@ -66,26 +65,61 @@ plt.imshow(town)
 
 
 
+# Allowing command line arguments
+#if 4 args are not given at command line (1st arg is model.py file name)
+if len (sys.argv) != 6: 
+    
+    if len (sys.argv) == 1: #if only 1 arg file name is entered
+        print('Model args not provided - running for default args')
+    else:
+        print ('Number of args incorrect - running for default agrs')
+    num_of_particles = 5000    #sets the default no of agents
+    p_east = 75  #sets default number of steps in the random walk
+    p_west = 5
+    p_north = 10
+    p_south = 10
+    
+     #sets the default neighbourhood value 
+
+else:
+    try:
+        num_of_particles = int(sys.argv[1])#User can input args from cmd prompt
+        
+        p_east = int(sys.argv[2]) 
+        p_west= int(sys.argv[3])  
+        p_north= int(sys.argv[4])  
+        p_south= int(sys.argv[5])  
+        print ('Running for args entered')
+   
+    except:
+        
+        # if str (sys.argv[1:]): #does not allow characters as variable args
+        #      print ('Wrong arg type entered, code will not run - use only integers')
+            
+        
+        sys.argv[2] + sys.argv[3] + sys.argv[4] + sys.argv[5] != 100 
+        print ('Perecentage probs must add to 100%')
+
 
 
 # Major model parameters
-num_of_particles = 5000    #total no of particles
+#num_of_particles = 5000    #total no of particles
 print ("Number of particles =", num_of_particles)
 
-#Chances/probability of wind blowing particle in different directions
-p_east = 75  #75 means 75% chance particle moves east each second/iteration 
-p_west = 5   #NESW probs can be integer or decimal/float, but will only use int
-p_north = 10 #just need sum = 100
-p_south = 10
-print ("Wind directions:\n", "East =", p_east,"%", "  West =", p_west,"%",
-       "  North =", p_north,"%", "  South =", p_south,"%")
+# #Chances/probability of wind blowing particle in different directions
+# p_east = 75  #75 means 75% chance particle moves east each second/iteration 
+# p_west = 5   #NESW probs can be integer or decimal/float, but will only use int
+# p_north = 10 #just need sum = 100
+# p_south = 10
+# print ("Wind directions:\n", "East =", p_east,"%", "  West =", p_west,"%",
+#        "  North =", p_north,"%", "  South =", p_south,"%")
 
 #Chances of wind turbulence effects 
 p_rise = 20 #20% chance particle rises 1m per second (1 pixel per iteration)
 p_same = 10 #particle stays at the same level
 p_fall = 70 #use integers, just need sum = 100
 print ("Turbulance probabilities:\n", "Rise =", p_rise,"%",
-       "  Remain same level =", p_same,"%", "  Fall =", p_fall,"%")
+        "  Remain same level =", p_same,"%", "  Fall =", p_fall,"%")
 
 
 
