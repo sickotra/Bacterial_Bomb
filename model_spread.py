@@ -80,6 +80,8 @@ if len (sys.argv) != 6:
     p_south = 10
     
      #sets the default neighbourhood value 
+elif sys.argv[2] + sys.argv[3] + sys.argv[4] + sys.argv[5] != 100 :
+    print ('Code will not run, Perecentage probs must add to 100%')
 
 else:
     try:
@@ -92,13 +94,12 @@ else:
         print ('Running for args entered')
    
     except:
-        
-        # if str (sys.argv[1:]): #does not allow characters as variable args
-        #      print ('Wrong arg type entered, code will not run - use only integers')
+        str (sys.argv[1:]) #does not allow characters as variable args
+        print ('Wrong arg type entered, code will not run - use only integers')
             
-        
-        sys.argv[2] + sys.argv[3] + sys.argv[4] + sys.argv[5] != 100 
-        print ('Perecentage probs must add to 100%')
+        #NOT WORKING 
+        # sys.argv[2] + sys.argv[3] + sys.argv[4] + sys.argv[5] != 100 
+        # print ('Perecentage probs must add to 100%')
 
 
 
