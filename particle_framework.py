@@ -124,19 +124,24 @@ class Particle:
 
         """
         
-        chance = random.randint(1, 100) #select a random integer between 1-100 
+        if p_east + p_west + p_north + p_south != 100 :  #prevent % over 100
+            #not really needed as will have this in cmd line entry too 
+            print ('Code will not run, Perecentage probs must add to 100%')
         
-        if chance <= p_east:
-            self._x = self._x + 1 #move east 75% chance default or value entered
+        else:
+            chance = random.randint(1, 100) #select a random integer between 1-100 
             
-        elif (p_east < chance <= p_east + p_west):
-            self._x = self._x - 1 #move west 5% chance default or value entered 
+            if chance <= p_east:
+                self._x = self._x + 1 #move east 75% chance default or value entered
+                
+            elif (p_east < chance <= p_east + p_west):
+                self._x = self._x - 1 #move west 5% chance default or value entered 
+                
+            elif (p_east + p_west < chance <= p_east + p_west + p_north):
+                self._y = self._y + 1 #move north 10% chance default or value entered
             
-        elif (p_east + p_west < chance <= p_east + p_west + p_north):
-            self._y = self._y + 1 #move north 10% chance default or value entered
-        
-        elif (p_east + p_west + p_north < chance <= p_east + p_west + p_north + p_south): 
-            self._y = self._y - 1 #move south 10% chance default of value entered 
+            elif (p_east + p_west + p_north < chance <= p_east + p_west + p_north + p_south): 
+                self._y = self._y - 1 #move south 10% chance default of value entered 
             
         #Town is non abstract landscape, particles cannot follow torus boundary
         #Create solid wall boundary, check if particle off edge & adjust

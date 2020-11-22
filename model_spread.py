@@ -23,34 +23,33 @@ import sys
 random.seed(0)
 
 
+
 # Allowing command line arguments
-#if 4 args are not given at command line (1st arg is model.py file name)
+#if 6 args are not given at command line (1st arg is model_spread.py file name)
 if len (sys.argv) != 6: 
     
     if len (sys.argv) == 1: #if only 1 arg file name is entered
         print('Model args not provided - running for default args')
     else:
         print ('Number of args incorrect - running for default agrs')
-    num_of_particles = 5000    #sets the default no of agents
-    p_east = 75  #sets default number of steps in the random walk
+    num_of_particles = 5000    #sets the default no of particles
+    p_east = 75  #sets default wind based probablities 
     p_west = 5
     p_north = 10
     p_south = 10
-    
-     
+
+#else if correct no of args provided, dont run if wind probs sum is not = to 100
 elif sys.argv[2] + sys.argv[3] + sys.argv[4] + sys.argv[5] != 100 :
     print ('Code will not run, Perecentage probs must add to 100%')
 
-else:
+else:    #else if args provided & wind probs = 100, then use these args given
     try:
         num_of_particles = int(sys.argv[1])#User can input args from cmd prompt
-        
         p_east = int(sys.argv[2]) 
         p_west= int(sys.argv[3])  
         p_north= int(sys.argv[4])  
         p_south= int(sys.argv[5])  
         print ('Running for args entered')
-   
     except:
         str (sys.argv[1:]) #does not allow characters as variable args
         print ('Wrong arg type entered, code will not run - use only integers')
@@ -70,6 +69,7 @@ for row in dataset:
         rowlist.append (value) #adds each row's data as its own rowlist element
     town.append (rowlist)  #each rowlist added to environ list, 2D now 
 f.close() 	#file closed after reading data
+
 
 
 
@@ -99,19 +99,10 @@ plt.imshow(town)
 
 
 
-            
-
-
-
-# Major model parameters
-#num_of_particles = 5000    #total no of particles
+# Major model parameters - print these to inform user 
 print ("Number of particles =", num_of_particles)
 
 # #Chances/probability of wind blowing particle in different directions
-# p_east = 75  #75 means 75% chance particle moves east each second/iteration 
-# p_west = 5   #NESW probs can be integer or decimal/float, but will only use int
-# p_north = 10 #just need sum = 100
-# p_south = 10
 print ("Wind directions:\n", "East =", p_east,"%", "  West =", p_west,"%",
         "  North =", p_north,"%", "  South =", p_south,"%")
 
@@ -139,7 +130,6 @@ for i in range(num_of_particles):
     #print (particles[i].particles)  
 #print ("Initial particles:") #comment out for large no's of agents, TEST
 #print (particles) #prints list of all initial agents at (50,150) bomb location
-
 
 
 print ("Spreading bomb particles--")
@@ -195,7 +185,6 @@ for i in range (num_of_particles):
     all_y_data.append (particles[i].y)
 #print(all_x_data)   #to test that the x & y coords list is made correctly
 #print(all_y_data)
-
 
 
 # Creating dictionary for x,y coords to use as pandas dataframe for density plot
