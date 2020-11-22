@@ -23,6 +23,39 @@ import sys
 random.seed(0)
 
 
+# Allowing command line arguments
+#if 4 args are not given at command line (1st arg is model.py file name)
+if len (sys.argv) != 6: 
+    
+    if len (sys.argv) == 1: #if only 1 arg file name is entered
+        print('Model args not provided - running for default args')
+    else:
+        print ('Number of args incorrect - running for default agrs')
+    num_of_particles = 5000    #sets the default no of agents
+    p_east = 75  #sets default number of steps in the random walk
+    p_west = 5
+    p_north = 10
+    p_south = 10
+    
+     
+elif sys.argv[2] + sys.argv[3] + sys.argv[4] + sys.argv[5] != 100 :
+    print ('Code will not run, Perecentage probs must add to 100%')
+
+else:
+    try:
+        num_of_particles = int(sys.argv[1])#User can input args from cmd prompt
+        
+        p_east = int(sys.argv[2]) 
+        p_west= int(sys.argv[3])  
+        p_north= int(sys.argv[4])  
+        p_south= int(sys.argv[5])  
+        print ('Running for args entered')
+   
+    except:
+        str (sys.argv[1:]) #does not allow characters as variable args
+        print ('Wrong arg type entered, code will not run - use only integers')
+
+
 
 # Setting up town and identifying bombing location 
 f = open ('inputs/wind.raster', newline='') #read in data from raster file
@@ -65,41 +98,8 @@ plt.imshow(town)
 
 
 
-# Allowing command line arguments
-#if 4 args are not given at command line (1st arg is model.py file name)
-if len (sys.argv) != 6: 
-    
-    if len (sys.argv) == 1: #if only 1 arg file name is entered
-        print('Model args not provided - running for default args')
-    else:
-        print ('Number of args incorrect - running for default agrs')
-    num_of_particles = 5000    #sets the default no of agents
-    p_east = 75  #sets default number of steps in the random walk
-    p_west = 5
-    p_north = 10
-    p_south = 10
-    
-     #sets the default neighbourhood value 
-elif sys.argv[2] + sys.argv[3] + sys.argv[4] + sys.argv[5] != 100 :
-    print ('Code will not run, Perecentage probs must add to 100%')
 
-else:
-    try:
-        num_of_particles = int(sys.argv[1])#User can input args from cmd prompt
-        
-        p_east = int(sys.argv[2]) 
-        p_west= int(sys.argv[3])  
-        p_north= int(sys.argv[4])  
-        p_south= int(sys.argv[5])  
-        print ('Running for args entered')
-   
-    except:
-        str (sys.argv[1:]) #does not allow characters as variable args
-        print ('Wrong arg type entered, code will not run - use only integers')
             
-        #NOT WORKING 
-        # sys.argv[2] + sys.argv[3] + sys.argv[4] + sys.argv[5] != 100 
-        # print ('Perecentage probs must add to 100%')
 
 
 
@@ -112,8 +112,8 @@ print ("Number of particles =", num_of_particles)
 # p_west = 5   #NESW probs can be integer or decimal/float, but will only use int
 # p_north = 10 #just need sum = 100
 # p_south = 10
-# print ("Wind directions:\n", "East =", p_east,"%", "  West =", p_west,"%",
-#        "  North =", p_north,"%", "  South =", p_south,"%")
+print ("Wind directions:\n", "East =", p_east,"%", "  West =", p_west,"%",
+        "  North =", p_north,"%", "  South =", p_south,"%")
 
 #Chances of wind turbulence effects 
 p_rise = 20 #20% chance particle rises 1m per second (1 pixel per iteration)
