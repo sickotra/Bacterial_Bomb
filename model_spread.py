@@ -154,7 +154,7 @@ end = time.perf_counter() #end the timer for the calculating distances loops
 print ("All particles have now settled on the ground")
 print ("Time taken to calculate particles reaching ground = " + str (end-start))
 print ("Time taken for particles to actually hit the ground in the town = "
-       +str(seconds_count)+" seconds")
+       +str(seconds_count)+" seconds") #num of iterations = the seconds taken
 
 
 # Plotting all particles after spreading on a scatter plot
