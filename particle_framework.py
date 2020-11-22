@@ -152,7 +152,7 @@ class Particle:
         if self._x > 300:  #if x, y hit 299 (300x300 is town dimension),
             self._x = 300  #stop from going any higher
         if self._y > 300:
-            self._y = 300
+            self._y = 300   #NOTE: not realistic behaviour in practice
                 
     
     def turbulence(self, p_rise, p_same, p_fall):

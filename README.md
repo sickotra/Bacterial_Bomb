@@ -29,6 +29,7 @@ and its features.
 	* `UML.pdf` - UML class diagram
 	* `UML.XML` - XML format to allow editing 
 	* `unit_tests.py` - tests for class method units
+	* `unit_testing.docx` - record of the tests taken
 * docs:
 	* folder to contain the code and links for sphinx docstrings pages 
 
