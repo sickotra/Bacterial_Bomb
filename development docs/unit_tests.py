@@ -13,6 +13,44 @@ import random
 random.seed() #Not set so that different cases can be tested, set to 0 to match
               #example inputs/outputs in unit_testing.docx table.
 
+def __init__test(self, town, particles, y, x):
+    """
+    Test the constructor method used in the Particles class to create each
+    Particle object instance.
+    
+    Procedure:
+        1. Print the initial y and x coords of particle.
+        2. Print the town data that has been passed in as an argument.
+        3. Print the particle data that has been passed in as an argument.
+        4. Print the height assigned to the particle.
+        
+    Verification:
+        5. Console outputs to show results as expected.
+        
+    """
+          
+    #the initial starting point for each particle is at the bomb location
+    _y = 150 
+    _x = 50
+    print ("The initial x and y coords of particle:", (_x, _y))
+    
+    _town = town  #giving every agent access to the map of the town
+    print (_town) #print to confirm arg passed in 
+    
+    _particles = particles #every particle access to 'particles' list
+    print(_particles) 
+    
+    _height = 75 #all particles initial height = building height 75m 
+    print ("the height of the particle",_height)
+
+
+town = "the town info" #arg inputs representing arg inputs in the main program
+particles = "the other particles' info" 
+y = 150 
+x = 50
+__init__test(1, town, particles, y, x)
+
+
 
 def spread_test(self, p_east, p_west, p_north, p_south):
     """
