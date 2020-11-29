@@ -8,7 +8,7 @@ and its features.
 * `README.md`- This file outlining folder contents and where to find more information on the program
 * `LICENSE` - GNU General Public License, version 3 (GPLv3)
 * `bact_bomb_gui.py` - The main file to be run
-* `model.py` - Code for the main class in the program
+* `model_spread.py` - Code for the main class in the program
 * `particle_framework.py` - Contains particles' behaviours class
 * `gui_help.txt` - File that includes help for the GUI Help button
 * `BactBomb_sickotra.ipynb` - Jupyter notebook file 
@@ -32,4 +32,5 @@ and its features.
 	* `unit_testing.docx` - record of the tests taken
 * docs:
 	* folder to contain the code and links for sphinx docstrings pages 
-
+* desktop exe:
+	* bact_bomb_gui - shortcut - Run the program from the desktop

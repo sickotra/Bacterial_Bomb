@@ -202,7 +202,7 @@ plt.ylabel('y metres')
 # Density plot using seaborn, darker green = very dense, yellow = less dense
 density = sns.kdeplot(x= df.x, y= df.y, cmap='YlGn',shade=True,bw_method=0.5) 
 density.figure.savefig("outputs/density_map.png") #save as an image file
-
+print("Density map created")
 
 
 
