@@ -4,6 +4,11 @@ A Model to track the spread of bacterial particles in a town.
 The document `./development docs/supporting_info` has full details of how the program works
 and its features. 
 
+Without reading the supporting information, the program can be quickly run by entering,
+`python model_spread.py` at the command line. This will run with the default parameters. 
+
+The license for the code can be found in the `LICENSE` file.
+
 ## Main folder Contents:
 * `README.md`- This file outlining folder contents and where to find more information on the program
 * `LICENSE` - GNU General Public License, version 3 (GPLv3)
@@ -34,3 +39,4 @@ and its features.
 	* folder to contain the code and links for sphinx docstrings pages 
 * desktop exe:
 	* bact_bomb_gui - shortcut - Run the program from the desktop
+
